@@ -1,0 +1,17 @@
+
+<ul class="heroes">
+    <li 
+        *ngFor="let hero of collection | paginate: { itemsPerPage: 5, currentPage: p }" 
+        (click)="onSelect(hero)"
+        [class.selected]="hero === selectedHero"
+    >
+        <span class="badge">{{hero.id}}</span>{{hero.name}}
+    </li>
+</ul>
+<pagination-controls (pageChange)="p = $event"></pagination-controls>
+<div *ngIf="selectedHero">
+    <h2>
+        {{selectedHero.name | uppercase}} is my hero
+    </h2>
+    <button (click)="gotoDetail()">View Details</button>
+</div>

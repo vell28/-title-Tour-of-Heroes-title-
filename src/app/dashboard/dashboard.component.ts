@@ -1,0 +1,28 @@
+import { Component, OnInit } from '@angular/core';
+
+import { Hero } from '../hero';
+import { HeroService } from '../hero.service';
+
+@Component({
+    moduleId: module.id,
+    selector: 'my-dashboard',
+    templateUrl: 'dashboard.component.html',
+    styleUrls: [ 'dashboard.component.css' ]
+})
+
+export class DashboardComponent implements OnInit {
+    heroes: Hero[] = [];
+    collection: any = [];
+    constructor(private heroService: HeroService) {
+        setTimeout(()=>{
+            for(let key in this.heroes){
+              this.collection.push(this.heroes[key]);
+            }
+        }) 
+     }
+
+    ngOnInit(): void {
+        this.heroService.getHeroes()
+            .then(heroes => this.heroes = heroes);
+    }
+}
